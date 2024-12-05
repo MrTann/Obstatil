@@ -1,2 +1,3 @@
-# Obstatil
-Istinye University Student Projects
+# obstatil_app
+
+A new Flutter project.

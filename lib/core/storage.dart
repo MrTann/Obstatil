@@ -1,0 +1,1 @@
+// hafızada kalanlar ve okumaalar
