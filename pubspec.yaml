@@ -1,21 +1,51 @@
+name: flutter_app
+description: "A new Flutter project."
+publish_to: 'none'  # Bu uygulama pub.dev'de yayınlanmayacak
+version: 0.1.0      # Uygulama versiyonu
+
+environment:
+  sdk: ^3.5.4      # Flutter SDK versiyonu
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8       # iOS stil ikonlar için
+  flutter_secure_storage: ^9.2.2 # Güvenli veri depolama için
+  go_router: ^14.6.1            # Sayfa yönlendirme (routing) için
+  shared_preferences: ^2.3.3     # Basit veri depolama için
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0         # Kod kalitesi kontrolleri için
+
+flutter:
+  uses-material-design: true    # Material Design widget'larını kullanmak için
+  assets:                       # Projedeki dosya kaynakları
+    - assets/images/           # Görseller için
+    - assets/icons/           # İkonlar için
+    - assets/languages/       # Dil dosyaları için
+    - assets/motions/        # Animasyon dosyaları için
+
 name: obstatil_app
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: 'none' # Projenin yayınlanmadığını belirtiyor
 version: 0.1.0
 environment:
-sdk: ^3.5.4
+sdk: ">=3.5.4 <4.0.0" # Flutter SDK versiyonu
 dependencies:
-cupertino_icons: ^1.0.8
 flutter:
 sdk: flutter
-flutter_secure_storage: ^9.2.2
-shared_preferences: ^2.3.3
+cupertino_icons: ^1.0.8 # iOS stil ikonlar için
+flutter_secure_storage: ^9.2.2 # Güvenli veri depolama için
+shared_preferences: ^2.3.3 # Basit veri depolama için
+go_router: ^14.6.1 # Sayfa yönlendirme (routing) için
 dev_dependencies:
 flutter_test:
 sdk: flutter
-flutter_lints: ^4.0.0
+flutter_lints: ^4.0.0 # Linting ve kod kalite kontrolü için
 flutter:
-uses-material-design: true
+uses-material-design: true # Material tasarım kullanımı
 assets:
 - assets/images/
 - assets/icons/
