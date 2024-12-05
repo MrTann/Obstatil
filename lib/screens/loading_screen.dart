@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'health_form_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,12 +10,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Loading Screen Example',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+      ),
       home: LoadingScreen(),
     );
   }
 }
 
-class LoadingScreen extends StatelessWidget {
+class LoadingScreen extends StatefulWidget {
+  @override
+  _LoadingScreenState createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // 3 saniye sonra HealthFormScreen'e geçiş
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HealthFormScreen()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +44,15 @@ class LoadingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-// Replace 'your_logo.png' with your logo's asset path
-            Image.asset('assets/images/girisanimasyon.png',
-                height: 100), // Adjust height as needed
-            SizedBox(height: 20), // Space between logo and loading indicator
-            CircularProgressIndicator(), // Loading indicator
-            SizedBox(height: 20), // Space below loading indicator
-            Text(
+            // Logo ekleniyor
+            Image.asset(
+              'assets/images/girisanimasyon.png', // Logo dosyanızın doğru path'ini buraya girin
+              height: 150,
+            ),
+            const SizedBox(height: 20),
+            const Text(
               'Loading...',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 24, color: Colors.white),
             ),
           ],
         ),
