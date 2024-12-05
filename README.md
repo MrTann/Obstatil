@@ -29,15 +29,6 @@ A new Flutter project.
 - Muhammed Emin Kıroğlu [eminkiroglu] (https://github.com/eminkiroglu)
 
   
-
-## Özellikler
-
-- [Ana özellik 1]
-
-- [Ana özellik 2]
-
-- [Ana özellik 3]
-
   
 
 ## Kullanılan Teknolojiler
@@ -48,12 +39,9 @@ A new Flutter project.
 
 - Mail
 
-  
-
-## Başlangıç
+-OpenAI
 
   
-
 ### Gereksinimler
 
 - Flutter SDK (sürüm X.X.X)
@@ -63,74 +51,18 @@ A new Flutter project.
 - [Diğer gerekli yazılımlar]
 
   
-
-### Kurulum Adımları
-
-1. Projeyi bilgisayarınıza indirin:
-
-```bash
-
-git  clone [proje-adresi]
-
-```
-
-  
-
-2. Proje klasörüne gidin:
-
-```bash
-
-cd [proje-adı]
-
-```
-
-  
-
-3. Gerekli paketleri yükleyin:
-
-```bash
-
-flutter  pub  get
-
-```
-
-  
-
-4. Uygulamayı başlatın:
-
-```bash
-
-flutter  run
-
-```
-
-  
-
-## Proje Yapısı
-
-```
-
-lib/
-
-├── modeller/ # Veri modelleri
-
-├── ekranlar/ # Uygulama ekranları
-
-├── widgets/ # Tekrar kullanılabilir arayüz öğeleri
-
-├── servisler/ # API servisleri
-
-└── yardımcılar/ # Yardımcı fonksiyonlar
-
-```
-
-  
-
 ## Ekran Görüntüleri
 
-[Uygulama ekran görüntüleri buraya eklenecek]
+### Sağlık Bilgi Formu Ekranı
+![Sağlık Bilgi formu ekranı](images/screenshots/healthform.jpeg)
 
-  
+### Yükleme ekranı
+![Yükleme ekranı](images/screenshots/loadingscreen.jpeg)
+
+### Ana Ekran
+  ![Ana ekran](images/screenshots/homescreen.jpeg)
+### Widget Ekranı
+![Widget ekranı](images/screenshots/widget.jpeg)
 
 ## Projeye Katkı Sağlama
 
@@ -167,6 +99,3 @@ lib/
 - [Diğer teşekkürler]
 
   
-  
-
-Bunlari degistirmeniz gerekmektedir ;-)
