@@ -54,15 +54,15 @@ A new Flutter project.
 ## Ekran Görüntüleri
 
 ### Sağlık Bilgi Formu Ekranı
-![Sağlık Bilgi formu ekranı](images/screenshots/healthform.jpeg)
+![Sağlık Bilgi formu ekranı](assets/images/screenshots/healthform.jpeg)
 
 ### Yükleme ekranı
-![Yükleme ekranı](images/screenshots/loadingscreen.jpeg)
+![Yükleme ekranı](assets/images/screenshots/loadingscreen.jpeg)
 
 ### Ana Ekran
-  ![Ana ekran](images/screenshots/homescreen.jpeg)
+  ![Ana ekran](assets/images/screenshots/healthform.jpeg)
 ### Widget Ekranı
-![Widget ekranı](images/screenshots/widget.jpeg)
+![Widget ekranı](assets/images/screenshots/widget.jpeg)
 
 ## Projeye Katkı Sağlama
 
