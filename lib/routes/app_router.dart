@@ -8,12 +8,12 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => LoadingScreen(),
+      builder: (context, state) => const LoadingScreen(),
     ),
     GoRoute(
       path: '/home',
       builder: (context, state) =>
-          HomeScreen(), // const yalnızca Stateless ve immutable ise
+          const HomeScreen(), // const yalnızca Stateless ve immutable ise
     ),
   ],
 );

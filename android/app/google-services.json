@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "900490830678",
+    "project_id": "obstatil-c5203",
+    "storage_bucket": "obstatil-c5203.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900490830678:android:102588fb96bbef67deacf7",
+        "android_client_info": {
+          "package_name": "com.obstatil.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900490830678-obnpkns7amqhiqduh14bkcerq7mpft36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.obstatil.app",
+            "certificate_hash": "4cfcb21fb45306b4e2b187133ae68e829c9db5af"
+          }
+        },
+        {
+          "client_id": "900490830678-0qu3lbrt8cck5gj83eo722nc61pnf9il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUguot3pkn_omp-1GB5OyUNDR89jmC8Mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900490830678-0qu3lbrt8cck5gj83eo722nc61pnf9il.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "900490830678-4tbhm7pnot2c9kiqjksbtvvefbomu0bf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.obstatilApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

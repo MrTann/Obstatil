@@ -1,61 +1,53 @@
 import 'package:flutter/material.dart';
-import 'health_form_screen.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Loading Screen Example',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
-      ),
-      home: LoadingScreen(),
-    );
-  }
-}
+import 'package:go_router/go_router.dart';
+import '../services/auth_service.dart';
+import '../services/health_form_service.dart';
 
 class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({super.key});
+
   @override
-  _LoadingScreenState createState() => _LoadingScreenState();
+  State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    // 3 saniye sonra HealthFormScreen'e geçiş
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HealthFormScreen()),
-      );
-    });
+    _checkAuthAndHealthForm();
+  }
+
+  Future<void> _checkAuthAndHealthForm() async {
+    try {
+      final userId = await AuthService.instance.getCurrentUserId();
+
+      if (userId == null) {
+        if (!mounted) return;
+        context.go('/login');
+        return;
+      }
+
+      final hasHealthForm =
+          await HealthFormService.instance.hasHealthForm(userId);
+
+      if (!mounted) return;
+
+      if (hasHealthForm) {
+        context.go('/home');
+      } else {
+        context.go('/health-form');
+      }
+    } catch (e) {
+      if (!mounted) return;
+      context.go('/login');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Logo ekleniyor
-            Image.asset(
-              'assets/images/girisanimasyon.png', // Logo dosyanızın doğru path'ini buraya girin
-              height: 150,
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Loading...',
-              style: TextStyle(fontSize: 24, color: Colors.white),
-            ),
-          ],
-        ),
+        child: CircularProgressIndicator(),
       ),
     );
   }

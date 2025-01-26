@@ -1,24 +1,68 @@
 import 'package:flutter/material.dart';
-import 'routes/app_router.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'firebase_options.dart';
+import 'app.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized(); // Flutter widget'larını başlat
-  runApp(const MyApp());
-}
+void main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+    // Firebase'i başlat
+    await Firebase.initializeApp(
+        name: "obstatil-c5203",
+        options: DefaultFirebaseOptions.currentPlatform);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Flutter App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    // Ekran yönünü dikey olarak sabitle
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    runApp(const App());
+  } catch (e, stackTrace) {
+    debugPrint('Initialization error: $e');
+    debugPrint('Stack trace: $stackTrace');
+
+    runApp(MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 48,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Uygulama başlatılırken bir hata oluştu.\nLütfen uygulamayı yeniden başlatın.',
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                if (e.toString().isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                  Text(
+                    e.toString(),
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
       ),
-      routerConfig: router, // go_router yapılandırmamızı kullan
-      debugShowCheckedModeBanner: false, // Debug bandını kaldır
-    );
+    ));
   }
 }
