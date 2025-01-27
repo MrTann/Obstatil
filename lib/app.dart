@@ -8,6 +8,7 @@ import 'screens/home_screen.dart';
 import 'screens/health_form_screen.dart';
 import 'screens/complaints_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/setting_screen.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -50,6 +51,10 @@ class App extends StatelessWidget {
         GoRoute(
           path: '/profile',
           builder: (context, state) => const ProfileScreen(),
+        ),
+        GoRoute(
+          path: '/settings',
+          builder: (context, state) => const SettingScreen(),
         ),
       ],
     );
