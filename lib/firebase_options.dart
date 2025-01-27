@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 class DefaultFirebaseOptions {
@@ -37,8 +38,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBU6eHy1f19znkQ0h2hzzEMLKtxBUMKJl4',
+  static final FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WEB']!,
     appId: '1:900490830678:web:8c7c2f2aa66c6ae4deacf7',
     messagingSenderId: '900490830678',
     projectId: 'obstatil-c5203',
@@ -46,16 +47,16 @@ class DefaultFirebaseOptions {
     authDomain: 'obstatil-c5203.firebaseapp.com',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCUguot3pkn_omp-1GB5OyUNDR89jmC8Mg',
+  static final FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID']!,
     appId: '1:900490830678:android:102588fb96bbef67deacf7',
     messagingSenderId: '900490830678',
     projectId: 'obstatil-c5203',
     storageBucket: 'obstatil-c5203.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBU6eHy1f19znkQ0h2hzzEMLKtxBUMKJl4',
+  static final FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_IOS']!,
     appId: '1:900490830678:ios:8c7c2f2aa66c6ae4deacf7',
     messagingSenderId: '900490830678',
     projectId: 'obstatil-c5203',

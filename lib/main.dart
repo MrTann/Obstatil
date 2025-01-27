@@ -10,7 +10,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     // .env dosyasını yükle
-    await dotenv.load();
+    await dotenv.load(fileName: ".env");
 
     // Firebase'i başlat
     await Firebase.initializeApp(

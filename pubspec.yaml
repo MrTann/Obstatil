@@ -42,6 +42,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - assets/images/girisanimasyon.png
     - assets/images/google_logo.png
     - assets/icons/
