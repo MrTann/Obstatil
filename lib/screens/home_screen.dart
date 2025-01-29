@@ -9,6 +9,7 @@ import '../models/complaint.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import 'package:logger/logger.dart';
+import '../widgets/bottom_menu.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

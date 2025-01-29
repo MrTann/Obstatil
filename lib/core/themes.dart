@@ -1,1 +1,0 @@
-// temalandırma+renkler+... yazcaz
