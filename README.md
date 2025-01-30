@@ -1,6 +1,5 @@
 # obstatil_app
 
-A new Flutter project.
 
 # Flutter Projesi
 
@@ -13,6 +12,21 @@ A new Flutter project.
 ## Proje Hakkında
 
 [Bu mobil uygulama, engelli bireylerin yaşam alanlarına duyarlılık yaratmayı hedeflemektedir. Uygulama, engellilerin yollarına veya kaldırımlarına park eden araçların fotoğrafını çekerek, ilgili bölgenin emniyet birimine e-posta yoluyla otomatik olarak şikayet bildirimi göndermektedir.]
+
+
+## Proje Yapısı
+
+```
+
+lib/
+
+├── modeller/ # Veri modelleri
+
+├── ekranlar/ # Uygulama ekranları
+
+├── widgets/ # Tekrar kullanılabilir arayüz öğeleri
+
+```
 
   
 
@@ -44,25 +58,39 @@ A new Flutter project.
   
 ### Gereksinimler
 
-- Flutter SDK (sürüm X.X.X)
+- Flutter SDK (sürüm 3.27.2)
 
-- Dart SDK (sürüm X.X.X)
+- Dart SDK (sürüm 3.6.1)
 
-- [Diğer gerekli yazılımlar]
+- [Simulator]
 
   
 ## Ekran Görüntüleri
 
-### Sağlık Bilgi Formu Ekranı
-![Sağlık Bilgi formu ekranı](assets/images/screenshots/healthform.jpeg)
 
 ### Yükleme ekranı
-![Yükleme ekranı](assets/images/screenshots/loadingscreen.jpeg)
+![Yükleme ekranı](assets/images/screenshots/loading_screen.png)
 
 ### Ana Ekran
-  ![Ana ekran](assets/images/screenshots/healthform.jpeg)
+  ![Ana ekran](assets/images/screenshots/home_screen.png)
+
 ### Widget Ekranı
-![Widget ekranı](assets/images/screenshots/widget.jpeg)
+![Widget ekranı](assets/images/screenshots/widget.png)
+
+### Ayarlar Ekranı
+![Ayarlar Ekranı](assets/images/screenshots/settings_screen.png)
+
+### Arama Ekranı
+![Arama ekranı](assets/images/screenshots/search_screen.png)
+
+### Akıllı Asistan Ekranı
+![Asistan ekranı](assets/images/screenshots/voice_screen.png)
+
+### Geçmiş Şikayetlerim Ekranı
+![Geçmişte yapılan şikayetler ekranı](assets/images/screenshots/history_screen.png)
+
+
+
 
 ## Projeye Katkı Sağlama
 
