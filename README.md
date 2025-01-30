@@ -90,20 +90,8 @@ lib/
 ![Geçmişte yapılan şikayetler ekranı](assets/images/screenshots/history_screen.png)
 
 
-
-
-## Projeye Katkı Sağlama
-
-1. Projeyi forklayın
-
-2. Yeni bir dal oluşturun (`git checkout -b ozellik/YeniOzellik`)
-
-3. Değişikliklerinizi kaydedin (`git commit -m 'Yeni özellik eklendi'`)
-
-4. Dalınıza gönderin (`git push origin ozellik/YeniOzellik`)
-
-5. Pull Request oluşturun
-
+### Demo videosu
+![Demo videomuz](assets/videos/demovideo.mov)
   
 
 ## Lisans
@@ -113,6 +101,8 @@ lib/
   
 
 ## İletişim
+
+- Mail : [obstatil@gmail.com]
 
 - Proje Bağlantısı: [https://github.com/MrTann/Obstatil]
 
