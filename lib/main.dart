@@ -1,66 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
-import 'firebase_options.dart';
-import 'app.dart';
+import 'package:provider/provider.dart';
+import 'core/routes.dart';
+import 'core/themes.dart';
 
-void main() async {
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // Flutter widget'larını başlat
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
+}
 
-    await Firebase.initializeApp(
-        name: "obstatil-c5203",
-        options: DefaultFirebaseOptions.currentPlatform);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
-    runApp(const App());
-  } catch (e, stackTrace) {
-    debugPrint('Initialization error: $e');
-    debugPrint('Stack trace: $stackTrace');
-
-    runApp(MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 48,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Uygulama başlatılırken bir hata oluştu.\nLütfen uygulamayı yeniden başlatın.',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                if (e.toString().isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text(
-                    e.toString(),
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ),
-      ),
-    ));
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+      return MaterialApp.router(
+        title: 'obstatil',
+        themeMode: themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        routerConfig: router,
+        debugShowCheckedModeBanner: false,
+      );
+    });
   }
 }

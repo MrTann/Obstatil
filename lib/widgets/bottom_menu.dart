@@ -24,15 +24,23 @@ class BottomMenu extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              context.go("/health-form");
+              context.go("/search");
             },
             icon: Icon(
-              Icons.camera_alt,
+              CupertinoIcons.search,
             ),
           ),
           IconButton(
             onPressed: () {
-              context.go("/complaints");
+              context.go("/voice");
+            },
+            icon: Icon(
+              Icons.android,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              context.go("/history");
             },
             icon: Icon(
               Icons.history,

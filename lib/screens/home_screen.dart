@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import '../services/camera_service.dart';
-import '../services/location_service.dart';
-import '../services/email_service.dart';
-import '../services/auth_service.dart';
-import '../services/firestore_service.dart';
-import '../models/complaint.dart';
 import 'package:provider/provider.dart';
-import '../providers/theme_provider.dart';
-import 'package:logger/logger.dart';
+import 'package:dotlottie_loader/dotlottie_loader.dart';
+import 'package:lottie/lottie.dart';
+import '../core/themes.dart';
 import '../widgets/bottom_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,194 +15,146 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _isLoading = false;
-  String? _userEmail;
-  String? _userName;
-  final _logger = Logger();
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUserInfo();
-  }
-
-  Future<void> _loadUserInfo() async {
-    try {
-      _userEmail = await AuthService.instance.getStoredEmail();
-      _userName = await AuthService.instance.getStoredName();
-      if (_userEmail == null) {
-        if (!mounted) return;
-        context.go('/login');
-      }
-    } catch (e) {
-      _logger.e('Load user info error: $e');
-    }
-  }
-
-  Future<void> _signOut() async {
-    try {
-      await AuthService.instance.signOut();
-      if (!mounted) return;
-      context.go('/login');
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Çıkış yapılırken bir hata oluştu')),
-      );
-    }
-  }
-
-  Future<void> _reportComplaint() async {
-    if (_userEmail == null || _userName == null) {
-      context.go('/login');
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    try {
-      // Kamera izni kontrolü
-      final hasCameraPermission =
-          await CameraService.instance.checkCameraPermission();
-      if (!hasCameraPermission) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kamera izni gerekli')),
-        );
-        return;
-      }
-
-      // Konum izni kontrolü
-      final hasLocationPermission =
-          await LocationService.instance.checkLocationPermission();
-      if (!hasLocationPermission) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Konum izni gerekli')),
-        );
-        return;
-      }
-
-      // Fotoğraf çek
-      final imagePath = await CameraService.instance.takePhoto();
-      if (imagePath == null) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Fotoğraf çekilemedi')),
-        );
-        return;
-      }
-
-      // Konum al
-      final position = await LocationService.instance.getCurrentLocation();
-      final address = await LocationService.instance.getAddressFromCoordinates(
-        position.latitude,
-        position.longitude,
-      );
-
-      // Şikayeti oluştur
-      final complaint = Complaint(
-        imagePath: imagePath,
-        latitude: position.latitude,
-        longitude: position.longitude,
-        address: address,
-        timestamp: DateTime.now(),
-      );
-
-      // Şikayeti Firestore'a kaydet
-      await FirestoreService.instance.saveComplaint(
-        userId: _userEmail!,
-        complaint: complaint,
-      );
-
-      // E-posta gönder
-      await EmailService.instance.sendComplaintEmail(
-        senderEmail: _userEmail!,
-        senderName: _userName!,
-        complaint: complaint,
-      );
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Şikayet kaydedildi ve e-posta hazırlandı')),
-      );
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Bir hata oluştu: $e')),
-      );
-    } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Obstatil'),
         actions: [
-          Consumer<ThemeProvider>(
-            builder: (context, themeProvider, _) => IconButton(
-              icon: Icon(themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode),
-              onPressed: () => themeProvider.toggleTheme(),
-            ),
+          IconButton(
+            icon: const Icon(Icons.light_mode),
+            onPressed: () {
+              context.read<ThemeProvider>().toggleTheme();
+            },
           ),
           IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () => context.go('/profile'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: _signOut,
+            icon: const Icon(Icons.share),
+            onPressed: () {},
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    child: const Icon(Icons.person, size: 35),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Hoş Geldiniz',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Ana Sayfa'),
+              onTap: () {
+                context.go('/');
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Ayarlar'),
+              onTap: () {
+                context.go('/settings');
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('Hakkımızda'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('Çıkış Yap'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (_userName != null) ...[
-              Text(
-                'Hoş geldin, $_userName!',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 24),
-            ],
             ElevatedButton.icon(
-              onPressed: _isLoading ? null : _reportComplaint,
-              icon: const Icon(Icons.camera_alt),
-              label: _isLoading
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white,
-                      ),
-                    )
-                  : const Text('Şikayet Et'),
+              onPressed: () {
+                context.go('/search');
+              },
+              icon: const Icon(Icons.add_photo_alternate_outlined),
+              label: const Text('Şikayet Et'),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                textStyle: const TextStyle(fontSize: 18),
               ),
             ),
-            const SizedBox(height: 16),
-            TextButton.icon(
-              onPressed: () => context.go('/complaints'),
+            const SizedBox(height: 20),
+            OutlinedButton.icon(
+              onPressed: () {
+                context.go('/history');
+              },
               icon: const Icon(Icons.history),
               label: const Text('Eski Şikayetlerim'),
+              style: OutlinedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                textStyle: const TextStyle(fontSize: 18),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 200,
+              height: 200,
+              child: DotLottieLoader.fromAsset(
+                "assets/motions/wheelchair2.lootie",
+                frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
+                  if (dotlottie != null) {
+                    return Lottie.memory(
+                      dotlottie.animations.values.single,
+                      repeat: true,
+                      fit: BoxFit.contain,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        child: const BottomMenu(),
       ),
     );
   }
